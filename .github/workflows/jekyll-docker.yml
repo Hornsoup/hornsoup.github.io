@@ -26,7 +26,7 @@ jobs:
 
       # Run Playwright tests
       - name: Run Playwright BVTs
-        run: npx playwright test --reporter=list
+        run: npx playwright test --reporter=html
 
       # Upload Playwright report as artifact
       - uses: actions/upload-artifact@v4
@@ -49,7 +49,7 @@ jobs:
           sed -i "s|<!--BUILDSTAMP-->|<p class='build-stamp'>Last Tested: ${TIMESTAMP}</p>|" ./_site/index.html
 
   deploy:
-    needs: playwrighttests # Only deploy if tests pass
+    needs: inject # Only deploy if tests pass
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
