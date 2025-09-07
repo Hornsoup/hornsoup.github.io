@@ -1,0 +1,27 @@
+{
+  "name": "hornsoup.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve _site -l 3000",
+    "test:playwright": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hornsoup/hornsoup.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hornsoup/hornsoup.github.io/issues"
+  },
+  "homepage": "https://github.com/Hornsoup/hornsoup.github.io#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.1",
+    "serve": "^14.2.5"
+  }
+}

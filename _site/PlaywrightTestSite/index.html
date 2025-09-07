@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erin — Automation Showcase</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    /* Optional overrides for subsite flavor */
+    .frame {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 24px;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    header h1 {
+      font-size: clamp(24px, 4vw, 36px);
+    }
+
+    .demo-section {
+      margin-top: 24px;
+    }
+
+    .demo-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .demo-card h2 {
+      margin-top: 0;
+      color: #ffd9c0;
+    }
+
+    .demo-card small {
+      color: #9b8f8f;
+      display: block;
+      margin-top: 6px;
+    }
+
+    footer {
+      margin-top: 36px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #9b8f8f;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="panel">
+      <header>
+        <h1>Automation Showcase</h1>
+        <div class="meta">Playwright & GitHub Actions in action</div>
+      </header>
+
+      <section class="demo-section">
+        <div class="demo-card">
+          <h2>Live Demo Form</h2>
+          <p>A small interactive form that is automatically tested by Playwright on each commit.</p>
+          <form id="demoForm">
+            <label for="inputName">Name:</label>
+            <input type="text" id="inputName" placeholder="Type your name">
+            <button data-test="submitName">Submit</button>
+          </form>
+          <div id="result"></div>
+          <script>
+            document.querySelector('#demoForm').onsubmit = e => {
+              e.preventDefault();
+              document.querySelector('#result').textContent = `Hello, ${document.querySelector('#inputName').value}!`;
+            };
+          </script>
+        </div>
+
+        <div class="demo-card">
+          <h2>Test Scripts</h2>
+          <small>Selected Playwright snippets:</small>
+          <pre><code>await page.goto('http://localhost:3000/PlaywrightTestSite/');
+await page.fill('#inputName', 'Erin');
+await page.click('button[type=submit]');
+await expect(page.locator('#result')).toHaveText('Hello, Erin!');</code></pre>
+        </div>
+
+        <div class="demo-card">
+          <h2>CI/CD Workflow</h2>
+          <small>GitHub Actions auto-runs Playwright tests and deploys if passing:</small>
+          <pre><code>name: Test & Deploy
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: microsoft/playwright-action@v1
+        with:
+          runTests: true
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploy to hosting platform"</code></pre>
+        </div>
+      </section>
+
+      <footer>
+        Site last tested: <span id="lastTest">[timestamp]</span> | Status: ✅ passing
+      </footer>
+    </div>
+  </div>
+</body>
+
+</html>
