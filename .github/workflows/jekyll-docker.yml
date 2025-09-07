@@ -36,8 +36,8 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-  inject:
-    needs: playwrighttests
+  deploy:
+    needs: playwrighttests # Only deploy if tests pass
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,13 +46,7 @@ jobs:
       - name: Insert build timestamp
         run: |
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          sed -i "s|<!--BUILDSTAMP-->|<p class='build-stamp'>Last Tested: ${TIMESTAMP}</p>|" ./_site/index.html
-
-  deploy:
-    needs: inject # Only deploy if tests pass
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+          sed -i "s|<!--BUILDSTAMP-->|<p class='build-stamp'>Last Tested: ${TIMESTAMP}</p>|" _site/index.html
       
       # Deploy only the site folder
       - name: Deploy to GitHub Pages
