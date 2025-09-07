@@ -26,7 +26,7 @@ jobs:
 
       # Run Playwright tests
       - name: Run Playwright BVTs
-        run: npx playwright test --headless --reporter=list
+        run: npx playwright test --reporter=list
 
       # Upload Playwright report as artifact
       - uses: actions/upload-artifact@v4
