@@ -57,7 +57,7 @@ on:
     branches: [ "main" ] # Only trigger when source pushes
 
 jobs:
-  test:
+  playwrighttests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -78,7 +78,7 @@ jobs:
 
       # Run Playwright tests
       - name: Run Playwright BVTs
-        run: npx playwright test --reporter=list
+        run: npx playwright test --reporter=html
 
       # Upload Playwright report as artifact
       - uses: actions/upload-artifact@v4
@@ -89,17 +89,23 @@ jobs:
           retention-days: 30
 
   deploy:
-    needs: test # Only deploy if tests pass
+    needs: playwrighttests # Only deploy if tests pass
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      # Inject timestamp into the built HTML
+      - name: Insert build timestamp
+        run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          sed -i "s|&lt;!--BUILDSTAMP--&gt;|&lt;p class='build-stamp'&gt;Last Tested: ${TIMESTAMP}&lt;/p&gt;|" _site/index.html
+      
       # Deploy only the site folder
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site # only my site, nothing else
+          publish_dir: ./_site # only my site, not the tests, nothing else
           publish_branch: gh-pages
 </code></pre>
         </div>
