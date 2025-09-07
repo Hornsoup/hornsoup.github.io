@@ -4,61 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Erin — Automation Showcase</title>
+  <title>Playwright Showcase</title>
   <link rel="stylesheet" href="../styles.css" />
-  <style>
-    /* Optional overrides for subsite flavor */
-    .frame {
-      max-width: 900px;
-      margin: 48px auto;
-      padding: 24px;
-    }
-
-    .panel {
-      padding: 24px;
-    }
-
-    header h1 {
-      font-size: clamp(24px, 4vw, 36px);
-    }
-
-    .demo-section {
-      margin-top: 24px;
-    }
-
-    .demo-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .demo-card h2 {
-      margin-top: 0;
-      color: #ffd9c0;
-    }
-
-    .demo-card small {
-      color: #9b8f8f;
-      display: block;
-      margin-top: 6px;
-    }
-
-    footer {
-      margin-top: 36px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #9b8f8f;
-    }
-  </style>
+  <link rel="stylesheet" href="../sidebar.css" />
+  <script src="../sidebar.js"></script>
 </head>
 
 <body>
-  <div class="frame">
+  <div class="content">
     <div class="panel">
       <header>
-        <h1>Automation Showcase</h1>
+        <h1>Playwright Showcase</h1>
         <div class="meta">Playwright & GitHub Actions in action</div>
       </header>
 
@@ -83,18 +39,11 @@
         <div class="demo-card">
           <h2>Test Scripts</h2>
           <small>Selected Playwright snippets:</small>
-          <pre><code>test('has title', async ({ page }) => {
-  await page.goto('./index.html');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Erin — Portfolio/);
-});
-
-test('get started link', async ({ page }) => {
-  await page.goto('./PlaywrightTestSite/index.html');
-  await page.fill('#inputName', 'Erin');
+          <pre><code>test('get started link', async ({ page }) => {
+  await page.goto('./PlaywrightTestSite');
+  await page.fill('#inputName', 'Diver Dave');
   await page.click('button[data-test="submitName"]');
-  await expect(page.locator('#result')).toHaveText('Hello, Erin!');
+  await expect(page.locator('#result')).toHaveText('Hello, Diver Dave!');
 });</code></pre>
         </div>
 
@@ -155,10 +104,6 @@ jobs:
 </code></pre>
         </div>
       </section>
-
-      <footer>
-        Site last tested: <span id="lastTest">[timestamp]</span> | Status: ✅ passing
-      </footer>
     </div>
   </div>
 </body>

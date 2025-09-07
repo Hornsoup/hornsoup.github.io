@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Erin — Portfolio</title>
+  <title>Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="sidebar.css" />
+  <script src="sidebar.js"></script>
 </head>
+
 <body>
-  <div class="frame">
+  <div class="content">
+
     <div class="panel">
-      <header>
-        <h1>List of projects</h1>
-        <div class="meta">A few things I built — current and archived</div>
+      <header class="main-header">
+        <h1 data-test="siteHeader">List of projects</h1>
+        <div class="meta">A few projects showcasing my work</div>
       </header>
-      <h4>Current</h4>
-      <div class="projects">
-        <div class="project">
-          <a href="./PlaywrightTestSite/index.html">Playwright Test Site</a>
-          <small>
-            A sub-site showcasing my work with Playwright.
-          </small>
+
+      <section class="projects-section" data-test="projectsSection">
+        <h4>Current Projects</h4>
+        <div class="projects">
+          <div class="project" data-test="projectCard">
+            <a href="./PlaywrightTestSite/index.html" data-test="projectTitle">Playwright Test Site</a>
+            <small data-test="projectDescription">
+              A sub-site showcasing my automation skills using Playwright and GitHub Actions.
+            </small>
+          </div>
         </div>
-      </div>
-      <h4>Archive</h4>
-      <div class="projects">
-        <div class="project">
-          <a href="./PotionomicsRecipeFinder/index.html">Potionomics Recipe Finder</a>
-          <small>
-            Algorithmic recipe enumerator for Potionomics. Runs millions of combinations quickly; QoL UI and outputs. Values function over form as it was a personal tool.
-          </small>
+
+        <h4>Archived Projects</h4>
+        <div class="projects">
+          <div class="project" data-test="projectCard">
+            <a href="./PotionomicsRecipeFinder/index.html" data-test="projectTitle">Potionomics Recipe Finder</a>
+            <small data-test="projectDescription">
+              Algorithmic recipe enumerator for Potionomics. Runs millions of combinations quickly; QoL UI and outputs.
+              Values function over form as it was a personal tool.
+            </small>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <footer>
+        <!--BUILDSTAMP-->
+      </footer>
     </div>
   </div>
 </body>
+
 </html>
